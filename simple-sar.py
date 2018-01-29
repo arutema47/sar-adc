@@ -29,9 +29,11 @@ class SAR:
         self.adcout = np.zeros([self.adcin.shape[0]])
     
     def comp(self, compin):
-        comptemp = compin + np.random.rand(compin.shape[0])*self.ncomp
+        #note that comparator output suffers from noise of comp and dac
+        comptemp = compin + np.random.rand(compin.shape[0])*self.ncomp + np.random.rand(compin.shape[0])*self.ndac
+        
         #comp function in vectors
-        out = np.maximum(comptemp*10E6, -1)
+        out = np.maximum(comptemp*10E6 #a very big number, -1)
         out = np.minimum(out, 1)
         return(out)
     
@@ -39,23 +41,27 @@ class SAR:
         cdac = np.zeros((self.bit,1))
         for i in range(self.bit):
             cdac[i] = np.power(self.radix,(self.bit-1-i))
-        cdac = cdac/(sum(cdac)+1) #normalize
+        cdac = cdac/(sum(cdac)+1) #normalize to full scale = 1
+        #mismatches are tbd
         return(cdac)
 
     def sarloop(self):
-        #add noise to input
-        self.adcin += np.random.rand(self.adcin.shape[0])*self.nsamp
-        #for cycle
+        #add sampling noise to input first
+        self.adcin += np.random.rand(self.adcin.shape[0]) * self.nsamp
+                         
+        #loop for sar cycles
         for cyloop in range(self.bit):
             compout = self.comp(self.adcin)
-            self.adcin += compout * (-1) * self.cdac[cyloop] 
+            self.adcin += compout * (-1) * self.cdac[cyloop] #update cdac output
             self.adcout += np.power(self.radix, self.bit-1-cyloop)*np.maximum(compout, 0)
             print(cyloop)
         return(self.adcout)
 
+# lets test the adc by random vectors..
 adcin = (np.random.rand(10000)-0.5)/2
 print(adcin)
 adc = SAR(adcin, 10, 0, 0, 0, 2)
 adcout=adc.sarloop()
 
+#print it.
 print(adcout)
