@@ -33,7 +33,7 @@ class SAR:
         comptemp = compin + np.random.rand(compin.shape[0])*self.ncomp + np.random.rand(compin.shape[0])*self.ndac
         
         #comp function in vectors
-        out = np.maximum(comptemp*10E6 #a very big number, -1)
+        out = np.maximum(comptemp*10E6, -1)
         out = np.minimum(out, 1)
         return(out)
     
