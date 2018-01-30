@@ -30,7 +30,7 @@ class SAR:
     
     def comp(self, compin):
         #note that comparator output suffers from noise of comp and dac
-        comptemp = compin + np.random.rand(compin.shape[0])*self.ncomp + np.random.rand(compin.shape[0])*self.ndac
+        comptemp = compin + np.random.randn(compin.shape[0])*self.ncomp + np.random.randn(compin.shape[0])*self.ndac
         
         #comp function in vectors
         out = np.maximum(comptemp*10E6, -1)
@@ -47,7 +47,7 @@ class SAR:
 
     def sarloop(self):
         #add sampling noise to input first
-        self.adcin += np.random.rand(self.adcin.shape[0]) * self.nsamp
+        self.adcin += np.random.randn(self.adcin.shape[0]) * self.nsamp
                          
         #loop for sar cycles
         for cyloop in range(self.bit):
