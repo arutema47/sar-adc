@@ -1,4 +1,4 @@
-# sar-adc
+# What is this repo?
 - Model SAR ADCs
 
 - Fast Simulations using Numpy
