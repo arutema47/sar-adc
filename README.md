@@ -1,5 +1,9 @@
 # sar-adc
-sar adc models in python
+- Model SAR ADCs
+
+- Fast Simulations using Numpy
+
+- Can add noise for your design optimization!
 
 
 # usage
