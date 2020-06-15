@@ -52,3 +52,6 @@ plt.show()
 ```
 
 ## PLot results
+![raw](results/raw.png)
+
+![qunat](results/quantized.png)
