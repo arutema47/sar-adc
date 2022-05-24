@@ -10,7 +10,7 @@
 ```python
 # example.py
 
-from simple_sar import SAR, normalize_input
+from sar import SAR, normalize_input
 import numpy as np
 import matplotlib.pyplot as plt
 
