@@ -10,7 +10,7 @@
 ```python
 # example.py
 
-from simple_sar import SAR, normalize_input
+from sar import SAR, normalize_input
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -37,7 +37,7 @@ myadc = SAR(bit, ncomp, ndac, nsamp, radix)
 norm_input, center, maxbin = normalize_input(adcin)
 
 # Run ADC
-adcout=myadc.sarloop(norm_input)
+adcout=myadc.forward(norm_input)
 
 # Rescale ADC output to original
 adcout, _ , _ = normalize_input(adcout)
