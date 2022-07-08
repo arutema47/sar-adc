@@ -81,10 +81,10 @@ class SAR:
             plt.plot(adcout[:100])
             plt.show()
         
-        # 高速フーリエ変換
+        # FFT
         F = np.fft.fft(adcout)
 
-        # 振幅スペクトルを計算
+        # Spectrum analyze
         N = len(adcin)
         Amp = np.power(np.abs(F)[0:int(N/2)-1], 2)
         Amp[0] = 0 # cut DC
@@ -93,10 +93,10 @@ class SAR:
         #Amp = np.abs(F)
         #freq = freq
 
-        # 正規化
+        # normalize
         Amp /= max(Amp)
         
-        # グラフ表示
+        # plot
         if plot:
             plt.figure()
             plt.rcParams['font.family'] = 'Times New Roman'
@@ -109,7 +109,7 @@ class SAR:
             plt.grid()
             plt.show()
             
-        # SNR計算
+        # SNR calc
         sig_bin = np.where(Amp==np.abs(Amp).max())[0]
         signal_power = Amp[sig_bin]
 
