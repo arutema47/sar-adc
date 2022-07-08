@@ -5,8 +5,31 @@
 
 - Can add noise for your design optimization!
 
+# Very simple SAR Simulation
+```python
+# ADCBIT
+BIT = 12
 
-# usage
+# ADC noise
+noise = 2/2**BIT # noise is 2LSB
+
+# create ADC
+adc = SAR(BIT, noise, 0, 0, 2)
+
+# ADC conversion
+adcout = adc.forward_fft(input, plot=True)
+```
+```sh
+Simulating a 12 bit SAR ADC
+Capacitor mismatch not included
+plotting conversion results
+
+
+SNDR: [64.12131504]
+ENOB: [10.35902243]
+```
+
+# Further usage
 ```python
 # example.py
 
